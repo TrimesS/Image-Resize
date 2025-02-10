@@ -15,11 +15,14 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace ImageResize
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+	/// <summary>
+	/// Interaction logic for MainWindow.xaml
+	/// </summary>
+	
     public partial class MainWindow : Window
     {
+		public bool ratio = false;
+		public bool selected = false;
 		public string fileName;
         public MainWindow()
         {
@@ -36,6 +39,7 @@ namespace ImageResize
 			{
 				fileName = dialog.FileName;
 			}
+			image_output.Text = fileName;
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
@@ -72,9 +76,10 @@ namespace ImageResize
 						// 绘制图片
 						graphics.DrawImage(originalImage, 0, 0, newWidth, newHeight);
 					}
-
+					
 					// 保存调整尺寸后的图片
 					resizedImage.Save(fileName+"/output.jpg");
+					
 				}
 			}
 
@@ -85,7 +90,7 @@ namespace ImageResize
 		private void Button_Click_1(object sender, RoutedEventArgs e)
 		{
 			OpenFileDialog openFileDialog = new OpenFileDialog();
-			openFileDialog.Filter = "Image File (*.jpg)|*.jpg|All files (*.*)|*.*"; // 设置文件过滤器
+			openFileDialog.Filter = "Image File (*.jpg;*.png)|*.jpg;*.png|All files (*.*)|*.*"; // 设置文件过滤器
 			openFileDialog.Multiselect = false; // 是否允许选择多个文件
 
 			if (openFileDialog.ShowDialog() == true)
@@ -93,6 +98,12 @@ namespace ImageResize
 				string selectedFilePath = openFileDialog.FileName;
 				image_input.Text = selectedFilePath; // 将选择的文件路径显示在TextBox中
 			}
+			using (Image image = Image.FromFile(image_input.Text)) //更新尺寸
+			{
+				iwidth.Text = image.Width.ToString();
+				iheight.Text = image.Height.ToString();
+			}
+			selected = true;
 
 		}
 
@@ -101,6 +112,62 @@ namespace ImageResize
 
 		}
 
+		public void CheckBox_Checked(object sender, RoutedEventArgs e)
+		{
+			ratio = true;
+		}
+		public void CheckBox_UnChecked(object sender, RoutedEventArgs e)
+		{
+			ratio = false;
+		}
+
+		private void iwidth_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+		{
+			if (selected == true && ratio==true)
+			{
+				using (Image image = Image.FromFile(image_input.Text)) //更新尺寸
+				{
+					double aspectRatio = (double)image.Width / image.Height;
+					int newWidth, newHeight;
+					if (image.Width > image.Height) // 图片更宽
+					{
+						newWidth = int.Parse(iwidth.Text);
+						newHeight = (int)(newWidth / aspectRatio);
+						iheight.Text = newHeight.ToString();
+					}
+					else // 图片更高或正方形
+					{
+						newHeight = int.Parse(iheight.Text);
+						newWidth = (int)(newHeight * aspectRatio);
+						iwidth.Text = newWidth.ToString();
+					}
+				}
+			}
+		}
+
+		private void iheight_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+		{
+			if (selected == true && ratio == true)
+			{
+				using (Image image = Image.FromFile(image_input.Text)) //更新尺寸
+				{
+					double aspectRatio = (double)image.Width / image.Height;
+					int newWidth, newHeight;
+					if (image.Width > image.Height) // 图片更宽
+					{
+						newWidth = int.Parse(iwidth.Text);
+						newHeight = (int)(newWidth / aspectRatio);
+						iheight.Text = newHeight.ToString();
+					}
+					else // 图片更高或正方形
+					{
+						newHeight = int.Parse(iheight.Text);
+						newWidth = (int)(newHeight * aspectRatio);
+						iwidth.Text = newWidth.ToString();
+					}
+				}
+			}
+		}
 	}
 }
 

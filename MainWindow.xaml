@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="279" Width="452">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="310,142,0,0" VerticalAlignment="Top" Click="Button_Click" Height="45" Width="80"/>
-        <TextBox x:Name="image_input" HorizontalAlignment="Left" Margin="96,141,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="228,141,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
-        <TextBox x:Name="image_output" HorizontalAlignment="Left" Margin="96,170,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="228,169,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
-        <TextBox x:Name="iwidth" HorizontalAlignment="Left" Margin="96,77,0,0" TextWrapping="Wrap" Text="800" VerticalAlignment="Top" Width="72" Height="38"/>
-        <TextBox x:Name="iheight" HorizontalAlignment="Left" Margin="206,77,0,0" TextWrapping="Wrap" Text="600" VerticalAlignment="Top" Width="72" Height="38"/>
-        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="310,88,0,0" VerticalAlignment="Top"/>
+        <Button Content="缩放" HorizontalAlignment="Left" Margin="310,142,0,0" VerticalAlignment="Top" Click="Button_Click" Height="45" Width="80"/>
+        <TextBox Height="17" x:Name="image_input" HorizontalAlignment="Left" Margin="28,141,0,0" TextWrapping="Wrap" Text="在此输入文件位置或选择文件" VerticalAlignment="Top" Width="188" TextChanged="TextBox_TextChanged"/>
+        <Button Content="选择文件" HorizontalAlignment="Left" Margin="228,141,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <TextBox Height="17" x:Name="image_output" HorizontalAlignment="Left" Margin="28,170,0,0" TextWrapping="Wrap" Text="输出文件夹，默认输出在根目录" VerticalAlignment="Top" Width="188" TextChanged="TextBox_TextChanged"/>
+        <Button Content="输出文件夹" HorizontalAlignment="Left" Margin="228,169,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
+        <TextBox x:Name="iwidth" HorizontalAlignment="Left" Margin="96,77,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="72" Height="38" TextChanged="iwidth_TextChanged"/>
+        <TextBox x:Name="iheight" HorizontalAlignment="Left" Margin="206,77,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="72" Height="38" TextChanged="iheight_TextChanged"/>
+        <CheckBox Content="按比例缩放" HorizontalAlignment="Left" Margin="310,88,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_UnChecked"/>
 
     </Grid>
 </Window>
